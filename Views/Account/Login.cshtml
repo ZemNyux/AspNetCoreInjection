@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.LoginViewModel
+@{
+    ViewData["Title"] = "Вхід в систему";
+}
+<div class="page-wrapper">
+    <div class="page-card">
+        <h2 class="page-title">Вхід в систему</h2>
+        <form method="post" action="/Account/Login">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="ReturnUrl" value="@Model.ReturnUrl" />
+
+            <div class="mb-3">
+                <label for="Username" class="form-label">Логін</label>
+                <input type="text"
+                       id="Username"
+                       name="Username"
+                       class="form-control"
+                       value="Alex" />
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label for="Password" class="form-label">Пароль</label>
+                <input type="password"
+                       id="Password"
+                       name="Password"
+                       class="form-control"
+                       value="Alex!#$1234_" />
+                <span class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-main w-100">Увійти</button>
+        </form>
+
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="alert alert-danger page-alert mt-3">
+                @Html.ValidationSummary(false, "", new { @class = "mb-0" })
+            </div>
+        }
+    </div>
+</div>

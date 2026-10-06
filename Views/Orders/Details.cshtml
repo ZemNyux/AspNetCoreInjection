@@ -1,0 +1,23 @@
+﻿@using WebApplication1.Models
+@model Order
+
+@{
+    ViewData["Title"] = "Деталі замовлення";
+}
+
+<div class="page-wrapper">
+    <div class="page-card">
+        <h2 class="page-title">Деталі замовлення</h2>
+        <ul class="details-list">
+            <li><strong>ID:</strong> @Model.Id</li>
+            <li><strong>Товар:</strong> @Model.ProductName</li>
+            <li><strong>Ціна:</strong> @Model.Price грн</li>
+            <li><strong>Адреса:</strong> @Model.Address</li>
+        </ul>
+        <div style="margin-top: 28px;">
+            <a href="@Url.Action("Logout", "Account")" class="btn btn-main w-100">
+                Вийти з акаунту
+            </a>
+        </div>
+    </div>
+</div>

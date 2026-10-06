@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebApplication1.Models.Order>
+
+@{
+    ViewData["Title"] = "SQL ін'єкції";
+}
+
+<div class="page-wrapper">
+    <div class="page-card">
+        <h2 class="page-title text-danger">
+            ДЕМОНСТРАЦІЯ SQL INJECTION
+        </h2>
+
+        @if (ViewBag.IsInjectionDemo == true)
+        {
+            <div class="alert alert-danger">
+                <strong>УВАГА!</strong> Ви щойно виконали SQL-ін'єкцію!<br />
+                Введений фільтр: <code>@ViewBag.AppliedFilter</code><br />
+                Ви отримали доступ до <strong>ВСІХ</strong> замовлень у базі даних, хоча мали б бачити тільки свої.
+            </div>
+        }
+        else
+        {
+            <p>Введіть параметр <code>filter</code> у адресний рядок для пошуку.</p>
+        }
+
+        @if (Model.Any())
+        {
+            <h4>Знайдені замовлення:</h4>
+            <ul class="details-list">
+                @foreach (var order in Model)
+                {
+                    <li>
+                        <strong>ID:</strong> @order.Id<br />
+                        <strong>Товар:</strong> @order.ProductName<br />
+                        <strong>Ціна:</strong> @order.Price грн<br />
+                        <strong>Адреса:</strong> @order.Address<br />
+                        <strong>Власник (UserId):</strong> @order.UserId
+                        <hr />
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>Замовлень не знайдено.</p>
+        }
+
+        <a href="@Url.Action("RedirectToUserOrder", "Account")" class="btn btn-main w-100 mt-4">
+            Повернутися до мого замовлення
+        </a>
+    </div>
+</div>
